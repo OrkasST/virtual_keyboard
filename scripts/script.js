@@ -1,3 +1,5 @@
+import { keys } from "./keys.js";
+
 function create({element = 'div',className = '', id = '', content='', isInBody = false}) {
     let newDiv = document.createElement(element);
     newDiv.className = className;
@@ -19,66 +21,7 @@ function changeContent (element, newContent = '') {
 }
 
 let lang = 'en';
-const keys = {
-    en: [
-        ['~ `', 'Backquote'],
-        ['! 1', 'Digit1'],
-        ['@ 2', 'Digit2'],
-        ['# 3', 'Digit3'],
-        ['$ 4', 'Digit4'],
-        ['% 5', 'Digit5'],
-        ['^ 6', 'Digit6'],
-        ['& 7', 'Digit7'],
-        ['* 8', 'Digit8'],
-        ['( 9', 'Digit9'],
-        [') 0', 'Digit0'],
-        ['_ -', 'Minus'],
-        ['+ =', 'Equal'],
-        ['Backspace', 'Backspace'],
-        ['Tab', 'Tab'],
-        ['Q', 'KeyQ'],
-        ['W', 'KeyW'],
-        ['E', 'KeyE'],
-        ['R', 'KeyR'],
-        ['T', 'KeyT'],
-        ['Y', 'KeyY'],
-        ['U', 'KeyU'],
-        ['I', 'KeyI'],
-        ['O', 'KeyO'],
-        ['P', 'KeyP'],
-        ['{ [', 'BracketLeft'],
-        ['} ]', 'BracketRight'],
-        ['| \\', 'Backslash'],
-        ['Del', 'Delete'],
-        ['Caps\tLock', 'CapsLock'],
-        ['A', 'KeyA'],
-        ['S', 'KeyS'],
-        ['D', 'KeyD'],
-        ['F', 'KeyF'],
-        ['G', 'KeyG'],
-        ['H', 'KeyH'],
-        ['J', 'KeyJ'],
-        ['K', 'KeyK'],
-        ['L', 'KeyL'],
-        [': ;', 'Semicolon'],
-        ['" \'', 'Quote'],
-        ['Enter', 'Enter'],
-        ['Shift', 'ShiftLeft'],
-        ['Z', 'KeyZ'],
-        ['X', 'KeyX'],
-        ['C', 'KeyC'],
-        ['V', 'KeyV'],
-        ['B', 'KeyB'],
-        ['N', 'KeyN'],
-        ['M', 'KeyM'],
-        ['< ,', 'Comma'],
-        ['> .', 'Period'],
-        ['? /', 'Slash'],
-        ['Up', 'ArrowUp'],
-        ['Shift', 'ShiftRight'],
-    ],
-    ru: []
-};
+
 
 const display = create({element: 'div', id: 'display', isInBody: true});
 const keyboard = create({element: 'div', className:'keyboard', id: 'board', isInBody: true});
