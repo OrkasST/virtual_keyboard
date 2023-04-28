@@ -1,12 +1,9 @@
 function create({element = 'div',className = '', id = '', content='', isInBody = false}) {
-    console.group('Creating div element...');
     let newDiv = document.createElement(element);
-    console.log('newDiv: ', newDiv);
     newDiv.className = className;
     newDiv.id = id;
     newDiv.innerText = content;
     if ( isInBody ) document.body.appendChild(newDiv);
-    console.groupEnd();
     return newDiv;
 }
 
@@ -14,10 +11,6 @@ function setRelation(parent, child) {
     if(typeof parent !== "object") throw new Error("Failed to set relation: Invalid parent element");
     if(typeof child !== "object") throw new Error("Failed to set relation: Invalid child element");
     parent.appendChild(child);
-    console.group('Parenting...');
-    console.log('child: ', child);
-    console.log('parent: ', parent);
-    console.groupEnd();
 }
 
 function changeContent (element, newContent = '') {
@@ -42,6 +35,47 @@ const keys = {
         ['_ -', 'Minus'],
         ['+ =', 'Equal'],
         ['Backspace', 'Backspace'],
+        ['Tab', 'Tab'],
+        ['Q', 'KeyQ'],
+        ['W', 'KeyW'],
+        ['E', 'KeyE'],
+        ['R', 'KeyR'],
+        ['T', 'KeyT'],
+        ['Y', 'KeyY'],
+        ['U', 'KeyU'],
+        ['I', 'KeyI'],
+        ['O', 'KeyO'],
+        ['P', 'KeyP'],
+        ['{ [', 'BracketLeft'],
+        ['} ]', 'BracketRight'],
+        ['| \\', 'Backslash'],
+        ['Del', 'Delete'],
+        ['Caps\tLock', 'CapsLock'],
+        ['A', 'KeyA'],
+        ['S', 'KeyS'],
+        ['D', 'KeyD'],
+        ['F', 'KeyF'],
+        ['G', 'KeyG'],
+        ['H', 'KeyH'],
+        ['J', 'KeyJ'],
+        ['K', 'KeyK'],
+        ['L', 'KeyL'],
+        [': ;', 'Semicolon'],
+        ['" \'', 'Quote'],
+        ['Enter', 'Enter'],
+        ['Shift', 'ShiftLeft'],
+        ['Z', 'KeyZ'],
+        ['X', 'KeyX'],
+        ['C', 'KeyC'],
+        ['V', 'KeyV'],
+        ['B', 'KeyB'],
+        ['N', 'KeyN'],
+        ['M', 'KeyM'],
+        ['< ,', 'Comma'],
+        ['> .', 'Period'],
+        ['? /', 'Slash'],
+        ['Up', 'ArrowUp'],
+        ['Shift', 'ShiftRight'],
     ],
     ru: []
 };

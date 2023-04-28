@@ -14,8 +14,7 @@
 }
 
 .keyboard {
-    width: 60rem;
-    height: 25rem;
+    width: 61rem;
     margin: auto;
     padding: 0.8rem;
     margin-top: 5rem;
@@ -40,6 +39,14 @@
     border-radius: 0.4rem;
 }
 
-#Backspace {
-    width: 7.2rem;
+#Backspace,
+#CapsLock,
+#ShiftLeft {
+    width: 8.5rem;
+}
+#Tab {
+    width: 4.5rem;
+}
+#Enter {
+    width: 7.66rem;
 }
