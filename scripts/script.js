@@ -16,10 +16,6 @@ function create({
 }
 
 function setRelation(parent, child) {
-  if (typeof parent !== "object")
-    throw new Error("Failed to set relation: Invalid parent element");
-  if (typeof child !== "object")
-    throw new Error("Failed to set relation: Invalid child element");
   parent.appendChild(child);
 }
 
@@ -27,11 +23,8 @@ let cursorPosition = 0;
 let typedText = "|";
 
 function changeContent(element, newContent = "", option = "renew") {
-  if (typeof element !== "object")
-    throw new Error("Failed to change content: Invalid element");
   if (option === "erase") {
     if (element.innerText.length <= 1) return;
-    // console.log(" element.innerText.length: ", element.innerText.length);
 
     if (element.id === "display") {
       typedText = typedText.substring(0, typedText.length - 2) + "|";
@@ -42,9 +35,6 @@ function changeContent(element, newContent = "", option = "renew") {
         0,
         element.innerText.length - 1
       );
-      // typedText
-      // console.log('typedText: ', typedText);
-      // console.log("~~~~~~~element.innerText.length: ", element.innerText.length);
   } else if (option === "add") {
     if (element.id === "display") {
       typedText =
@@ -52,13 +42,8 @@ function changeContent(element, newContent = "", option = "renew") {
         typedText.substring(cursorPosition + 1);
       newContent += "|";
       cursorPosition++;
-      // console.log("cursorPosition: ", cursorPosition);
       typedText += newContent;
       element.innerText = typedText;
-      // console.log("typedText: ", typedText);
-      // console.log("~~~typedText.length: ", typedText.length);
-      // console.log("element.innerText: ", element.innerText);
-      // console.log("~~~element.innerText.length: ", element.innerText.length);
     } else element.innerText += newContent;
   } else element.innerText = newContent;
 }
@@ -100,22 +85,24 @@ let elements = keys[lang].map((el) => {
     button.classList.add("multi-symbol");
   } else changeContent(button, el[0]);
   setRelation(keyboard, button);
+  button.addEventListener("mousedown", (e) => buttonDown(e));
+  button.addEventListener("mouseup", (e) => buttonUp(e))
   return button;
 });
 
-document.addEventListener("keydown", (e) => {
-  let element = document.getElementById(e.code);
+function buttonDown(e) {
+  let element = e.code ? document.getElementById(e.code) : e.target;
   element.classList.add("_pressed");
-  if (e.code === "ShiftLeft" || e.code === "ShiftRight") {
+  if (element.id === "ShiftLeft" || element.id === "ShiftRight") {
     isShiftPressed = isCaps ? !isShiftPressed : true;
     console.log('isShiftPressed: ', isShiftPressed);
     return;
   }
-  if (e.code === "Space") {
+  if (element.id === "Space") {
     changeContent(display, " ", "add");
     return;
   }
-  if (e.code === "Backspace") {
+  if (element.id === "Backspace") {
     changeContent(display, "", "erase");
     return;
   }
@@ -128,13 +115,17 @@ document.addEventListener("keydown", (e) => {
     ? element.innerText
     : element.innerText.toLowerCase();
   changeContent(display, text, "add");
-});
-document.addEventListener("keyup", (e) => {
-  let element = document.getElementById(e.code);
+}
+function buttonUp(e) {
+  let element = e.code ? document.getElementById(e.code) : e.target;
   element.classList.remove("_pressed");
-  if (e.code === "ShiftLeft" || e.code === "ShiftRight") isShiftPressed = isCaps ? !isShiftPressed : false;
-  if (e.code === "CapsLock") {
+  if (element.id === "ShiftLeft" || element.id === "ShiftRight") isShiftPressed = isCaps ? !isShiftPressed : false;
+  if (element.id === "CapsLock") {
     isCaps = !isCaps;
     isShiftPressed = !isShiftPressed;
   };
-});
+}
+
+
+document.addEventListener("keydown", (e) => buttonDown(e));
+document.addEventListener("keyup", (e) => buttonUp(e));
