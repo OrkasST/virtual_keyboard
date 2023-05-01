@@ -1,0 +1,85 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+#display {
+    width: 40rem;
+    height: 15rem;
+
+    border: 2px solid #343434;
+    border-radius: 1rem;
+    margin: auto;
+    margin-top: 5rem;
+
+    padding: 1rem;
+}
+
+.keyboard {
+    width: 64rem;
+    margin: auto;
+    padding: 0.8rem;
+    margin-top: 5rem;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+
+    border: 1px solid #676767;
+}
+
+.keyboard-button {
+    width: 3.6rem;
+    height: 3.6rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #454545;
+    border-radius: 0.4rem;
+
+    box-shadow: 0.1rem 0.1rem 0.2rem 0.05rem rgba(34, 34, 34, 0.3);
+}
+
+.multi-symbol {
+    justify-content: space-evenly;
+}
+
+#Backspace,
+#CapsLock,
+#ShiftLeft {
+    width: 8.5rem;
+}
+#Tab {
+    width: 4.2rem;
+}
+#Enter {
+    width: 7.66rem;
+}
+#ControlLeft,
+#ControlRight {
+    width: 5rem;
+}
+#Space {
+    width: 26.7rem;
+}
+
+._pressed {
+    background-color: #d0ff00;
+    box-shadow: none;
+}
+
+#ArrowLeft,
+#ArrowRight,
+#ArrowUp,
+#ArrowDown {
+    background-size: 30% 30%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+#ArrowLeft{ background-image: url("./assets/left-arrow.svg");}
+#ArrowUp{ background-image: url("./assets/up-arrow.svg");}
+#ArrowRight{ background-image: url("./assets/right-arrow.svg");}
+#ArrowDown{ background-image: url("./assets/down-arrow.svg");}
