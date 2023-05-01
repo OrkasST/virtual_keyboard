@@ -24,26 +24,27 @@ let typedText = "|";
 
 function changeContent(element, newContent = "", option = "renew") {
   if (option === "erase") {
-    if (element.innerText.length <= 1) return;
-
-    if (element.id === "display") {
-      typedText = typedText.substring(0, typedText.length - 2) + "|";
-      cursorPosition--;
-      element.innerText = typedText;
-    } else
-      element.innerText = element.innerText.substring(
-        0,
-        element.innerText.length - 1
-      );
+    if (typedText.length <= 1) return;
+    typedText =
+      typedText.substring(0, cursorPosition - 1) +
+      typedText.substring(cursorPosition);
+    cursorPosition--;
+    element.innerText = typedText;
+  } else if (option === "delete") {
+    if (typedText.length <= 1 || cursorPosition === typedText.length-1) return;
+    typedText =
+      typedText.substring(0, cursorPosition + 1) +
+      typedText.substring(cursorPosition + 2);
+    // cursorPosition--;
+    element.innerText = typedText;
   } else if (option === "add") {
     if (element.id === "display") {
       typedText =
         typedText.substring(0, cursorPosition) +
-        typedText.substring(cursorPosition + 1);
-      newContent += "|";
+        newContent +
+        typedText.substring(cursorPosition);
       cursorPosition++;
-      typedText += newContent;
-      element.innerText = typedText;
+      element.innerHTML = typedText;
     } else element.innerText += newContent;
   } else element.innerText = newContent;
 }
@@ -68,7 +69,7 @@ const keyboard = create({
 let elements = keys[lang].map((el) => {
   let button = create({
     element: "div",
-    className: "keyboard-button" + (el[2] ? (' ' + el[2]) : ''),
+    className: "keyboard-button" + (el[2] ? " " + el[2] : ""),
     id: el[1],
   });
   if (el[0].indexOf(" ") >= 0) {
@@ -86,7 +87,7 @@ let elements = keys[lang].map((el) => {
   } else changeContent(button, el[0]);
   setRelation(keyboard, button);
   button.addEventListener("mousedown", (e) => buttonDown(e));
-  button.addEventListener("mouseup", (e) => buttonUp(e))
+  button.addEventListener("mouseup", (e) => buttonUp(e));
   return button;
 });
 
@@ -95,7 +96,7 @@ function buttonDown(e) {
   element.classList.add("_pressed");
   if (element.id === "ShiftLeft" || element.id === "ShiftRight") {
     isShiftPressed = isCaps ? !isShiftPressed : true;
-    console.log('isShiftPressed: ', isShiftPressed);
+    console.log("isShiftPressed: ", isShiftPressed);
     return;
   }
   if (element.id === "Space") {
@@ -104,6 +105,15 @@ function buttonDown(e) {
   }
   if (element.id === "Backspace") {
     changeContent(display, "", "erase");
+    return;
+  }
+  if (element.id === "Delete") {
+    changeContent(display, "", "delete");
+    return;
+  }
+  if (element.id.substring(0, 5) === "Arrow") {
+    console.log(element.id.substring(5));
+    moveCursor(element.id.substring(5));
     return;
   }
   if (element.classList.contains("_func")) return;
@@ -119,13 +129,58 @@ function buttonDown(e) {
 function buttonUp(e) {
   let element = e.code ? document.getElementById(e.code) : e.target;
   element.classList.remove("_pressed");
-  if (element.id === "ShiftLeft" || element.id === "ShiftRight") isShiftPressed = isCaps ? !isShiftPressed : false;
+  if (element.id === "ShiftLeft" || element.id === "ShiftRight")
+    isShiftPressed = isCaps ? !isShiftPressed : false;
   if (element.id === "CapsLock") {
     isCaps = !isCaps;
     isShiftPressed = !isShiftPressed;
-  };
+  }
 }
 
+function moveCursor(direction) {
+  switch (direction) {
+    case "Left":
+      if (cursorPosition === 0) return;
+      typedText =
+        typedText.substring(0, cursorPosition - 1) +
+        "|" +
+        typedText.substring(cursorPosition - 1, cursorPosition) +
+        typedText.substring(cursorPosition + 1);
+      cursorPosition--;
+      display.innerText = typedText;
+      break;
+    case "Right":
+      if (cursorPosition === typedText.length - 1) return;
+      typedText =
+        typedText.substring(0, cursorPosition) +
+        typedText.substring(cursorPosition + 1, cursorPosition + 2) +
+        "|" +
+        typedText.substring(cursorPosition + 2);
+      cursorPosition++;
+      display.innerText = typedText;
+      break;
+    case "Up":
+      if (cursorPosition === 0) return;
+      typedText =
+        "|" +
+        typedText.substring(0, cursorPosition) +
+        typedText.substring(cursorPosition + 1);
+      cursorPosition = 0;
+      display.innerText = typedText;
+      break;
+    case "Down":
+      if (cursorPosition === typedText.length - 1) return;
+      typedText =
+        typedText.substring(0, cursorPosition) +
+        typedText.substring(cursorPosition + 1) +
+        "|";
+      cursorPosition = typedText.length - 1;
+      display.innerText = typedText;
+      break;
+    default:
+      break;
+  }
+}
 
 document.addEventListener("keydown", (e) => buttonDown(e));
 document.addEventListener("keyup", (e) => buttonUp(e));
