@@ -50,7 +50,10 @@ function changeContent(element, newContent = "", option = "renew") {
   } else element.innerText = newContent;
 }
 
-let lang = "ru";
+let lang = localStorage.getItem("lang")
+  ? JSON.parse(localStorage.getItem("lang"))
+  : "en";
+console.log('lang: ', lang);
 let isShiftPressed = false;
 let isCaps = false;
 
@@ -113,6 +116,10 @@ function buttonDown(e) {
   if (element.id === "Space") {
     if (isShiftPressed) {
       lang = lang === "en" ? "ru" : "en";
+
+      localStorage.removeItem("lang");
+      localStorage.setItem("lang", JSON.stringify(lang));
+
       keyboard.innerHTML = "";
       fillKeyboard();
     }
@@ -138,12 +145,12 @@ function buttonDown(e) {
       ? element.firstChild.innerText
       : element.lastChild.innerText
     : isShiftPressed
-      ? isCaps
-        ? element.innerText.toLowerCase()
-        : element.innerText
-      : isCaps
-        ? element.innerText
-        : element.innerText.toLowerCase();
+    ? isCaps
+      ? element.innerText.toLowerCase()
+      : element.innerText
+    : isCaps
+    ? element.innerText
+    : element.innerText.toLowerCase();
   changeContent(display, text, "add");
 }
 function buttonUp(e) {
