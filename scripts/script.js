@@ -99,21 +99,21 @@ function fillKeyboard() {
     button.addEventListener("mouseup", (e) => buttonUp(e));
     return button;
   });
-};
+}
 fillKeyboard();
 
 function buttonDown(e) {
   let element = e.code ? document.getElementById(e.code) : e.target;
   element.classList.add("_pressed");
   if (element.id === "ShiftLeft" || element.id === "ShiftRight") {
-    isShiftPressed = isCaps ? !isShiftPressed : true;
+    isShiftPressed = true; //isCaps ? !isShiftPressed : true;
     console.log("isShiftPressed: ", isShiftPressed);
     return;
   }
   if (element.id === "Space") {
     if (isShiftPressed) {
       lang = lang === "en" ? "ru" : "en";
-      keyboard.innerHTML = '';
+      keyboard.innerHTML = "";
       fillKeyboard();
     }
     changeContent(display, " ", "add");
@@ -138,18 +138,22 @@ function buttonDown(e) {
       ? element.firstChild.innerText
       : element.lastChild.innerText
     : isShiftPressed
-    ? element.innerText
-    : element.innerText.toLowerCase();
+      ? isCaps
+        ? element.innerText.toLowerCase()
+        : element.innerText
+      : isCaps
+        ? element.innerText
+        : element.innerText.toLowerCase();
   changeContent(display, text, "add");
 }
 function buttonUp(e) {
   let element = e.code ? document.getElementById(e.code) : e.target;
   element.classList.remove("_pressed");
   if (element.id === "ShiftLeft" || element.id === "ShiftRight")
-    isShiftPressed = isCaps ? !isShiftPressed : false;
+    isShiftPressed = false; //isCaps ? !isShiftPressed : false;
   if (element.id === "CapsLock") {
     isCaps = !isCaps;
-    isShiftPressed = !isShiftPressed;
+    // isShiftPressed = !isShiftPressed;
   }
 }
 
