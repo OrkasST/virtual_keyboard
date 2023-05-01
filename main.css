@@ -70,3 +70,16 @@
     background-color: #d0ff00;
     box-shadow: none;
 }
+
+#ArrowLeft,
+#ArrowRight,
+#ArrowUp,
+#ArrowDown {
+    background-size: 30% 30%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+#ArrowLeft{ background-image: url("./assets/left-arrow.svg");}
+#ArrowUp{ background-image: url("./assets/up-arrow.svg");}
+#ArrowRight{ background-image: url("./assets/right-arrow.svg");}
+#ArrowDown{ background-image: url("./assets/down-arrow.svg");}

@@ -57,7 +57,7 @@ export const keys = {
         ['< ,', 'Comma'],
         ['> .', 'Period'],
         ['? /', 'Slash'],
-        ['Up', 'ArrowUp', '_func'],
+        ['', 'ArrowUp', '_func'],
         ['Shift', 'ShiftRight', '_func'],
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         ['Ctrl', 'ControlLeft', '_func'],
@@ -66,9 +66,9 @@ export const keys = {
         ['', 'Space'],
         ['Alt', 'AltRight', '_func'],
         ['Ctrl', 'ControlRight', '_func'],
-        ['Left', 'ArrowLeft', '_func'],
-        ['Down', 'ArrowDown', '_func'],
-        ['Right', 'ArrowRight', '_func'],
+        ['', 'ArrowLeft', '_func'],
+        ['', 'ArrowDown', '_func'],
+        ['', 'ArrowRight', '_func'],
         
 
     ],
@@ -130,7 +130,7 @@ export const keys = {
         ['Б', 'Comma'],
         ['Ю', 'Period'],
         [', .', 'Slash'],
-        ['Up', 'ArrowUp', '_func'],
+        ['', 'ArrowUp', '_func'],
         ['Shift', 'ShiftRight', '_func'],
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         ['Ctrl', 'ControlLeft', '_func'],
@@ -139,8 +139,8 @@ export const keys = {
         ['', 'Space'],
         ['Alt', 'AltRight', '_func'],
         ['Ctrl', 'ControlRight', '_func'],
-        ['Left', 'ArrowLeft', '_func'],
-        ['Down', 'ArrowDown', '_func'],
-        ['Right', 'ArrowRight', '_func'],
+        ['', 'ArrowLeft', '_func'],
+        ['', 'ArrowDown', '_func'],
+        ['', 'ArrowRight', '_func'],
     ]
 };
