@@ -31,7 +31,8 @@ function changeContent(element, newContent = "", option = "renew") {
     cursorPosition--;
     element.innerText = typedText;
   } else if (option === "delete") {
-    if (typedText.length <= 1 || cursorPosition === typedText.length-1) return;
+    if (typedText.length <= 1 || cursorPosition === typedText.length - 1)
+      return;
     typedText =
       typedText.substring(0, cursorPosition + 1) +
       typedText.substring(cursorPosition + 2);
@@ -49,7 +50,7 @@ function changeContent(element, newContent = "", option = "renew") {
   } else element.innerText = newContent;
 }
 
-let lang = "en";
+let lang = "ru";
 let isShiftPressed = false;
 let isCaps = false;
 
@@ -59,6 +60,13 @@ const display = create({
   isInBody: true,
   //   content: "|",
 });
+const langSwitch = create({
+  element: "p",
+  className: "langSwitch",
+  isInBody: true,
+  content:
+    "press Shift + Space to switch the language\nнажмите Shift + Space чтобы переключить язык",
+});
 const keyboard = create({
   element: "div",
   className: "keyboard",
@@ -66,30 +74,33 @@ const keyboard = create({
   isInBody: true,
 });
 
-let elements = keys[lang].map((el) => {
-  let button = create({
-    element: "div",
-    className: "keyboard-button" + (el[2] ? " " + el[2] : ""),
-    id: el[1],
-  });
-  if (el[0].indexOf(" ") >= 0) {
-    el[0].split(" ").forEach((el, i) => {
-      setRelation(
-        button,
-        create({
-          element: "span",
-          className: i === 0 ? "upper-symbol" : "lower-symbol",
-          content: el,
-        })
-      );
+function fillKeyboard() {
+  keys[lang].map((el) => {
+    let button = create({
+      element: "div",
+      className: "keyboard-button" + (el[2] ? " " + el[2] : ""),
+      id: el[1],
     });
-    button.classList.add("multi-symbol");
-  } else changeContent(button, el[0]);
-  setRelation(keyboard, button);
-  button.addEventListener("mousedown", (e) => buttonDown(e));
-  button.addEventListener("mouseup", (e) => buttonUp(e));
-  return button;
-});
+    if (el[0].indexOf(" ") >= 0) {
+      el[0].split(" ").forEach((el, i) => {
+        setRelation(
+          button,
+          create({
+            element: "span",
+            className: i === 0 ? "upper-symbol" : "lower-symbol",
+            content: el,
+          })
+        );
+      });
+      button.classList.add("multi-symbol");
+    } else changeContent(button, el[0]);
+    setRelation(keyboard, button);
+    button.addEventListener("mousedown", (e) => buttonDown(e));
+    button.addEventListener("mouseup", (e) => buttonUp(e));
+    return button;
+  });
+};
+fillKeyboard();
 
 function buttonDown(e) {
   let element = e.code ? document.getElementById(e.code) : e.target;
@@ -100,6 +111,11 @@ function buttonDown(e) {
     return;
   }
   if (element.id === "Space") {
+    if (isShiftPressed) {
+      lang = lang === "en" ? "ru" : "en";
+      keyboard.innerHTML = '';
+      fillKeyboard();
+    }
     changeContent(display, " ", "add");
     return;
   }
