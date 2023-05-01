@@ -65,3 +65,8 @@
 #Space {
     width: 26.7rem;
 }
+
+._pressed {
+    background-color: #d0ff00;
+    box-shadow: none;
+}

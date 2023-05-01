@@ -104,7 +104,8 @@ let elements = keys[lang].map((el) => {
 });
 
 document.addEventListener("keydown", (e) => {
-  // console.log("down: ", e.code);
+  let element = document.getElementById(e.code);
+  element.classList.add("_pressed");
   if (e.code === "ShiftLeft" || e.code === "ShiftRight") {
     isShiftPressed = isCaps ? !isShiftPressed : true;
     console.log('isShiftPressed: ', isShiftPressed);
@@ -118,7 +119,6 @@ document.addEventListener("keydown", (e) => {
     changeContent(display, "", "erase");
     return;
   }
-  let element = document.getElementById(e.code);
   if (element.classList.contains("_func")) return;
   let text = element.classList.contains("multi-symbol")
     ? isShiftPressed
@@ -130,6 +130,8 @@ document.addEventListener("keydown", (e) => {
   changeContent(display, text, "add");
 });
 document.addEventListener("keyup", (e) => {
+  let element = document.getElementById(e.code);
+  element.classList.remove("_pressed");
   if (e.code === "ShiftLeft" || e.code === "ShiftRight") isShiftPressed = isCaps ? !isShiftPressed : false;
   if (e.code === "CapsLock") {
     isCaps = !isCaps;
