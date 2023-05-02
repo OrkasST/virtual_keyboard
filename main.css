@@ -55,16 +55,20 @@
 #ShiftLeft {
     width: 8.5rem;
 }
+
 #Tab {
     width: 4.2rem;
 }
+
 #Enter {
     width: 7.66rem;
 }
+
 #ControlLeft,
 #ControlRight {
     width: 5rem;
 }
+
 #Space {
     width: 26.7rem;
 }
@@ -82,7 +86,19 @@
     background-repeat: no-repeat;
     background-position: center;
 }
-#ArrowLeft{ background-image: url("./assets/left-arrow.svg");}
-#ArrowUp{ background-image: url("./assets/up-arrow.svg");}
-#ArrowRight{ background-image: url("./assets/right-arrow.svg");}
-#ArrowDown{ background-image: url("./assets/down-arrow.svg");}
+
+#ArrowLeft {
+    background-image: url("./assets/left-arrow.svg");
+}
+
+#ArrowUp {
+    background-image: url("./assets/up-arrow.svg");
+}
+
+#ArrowRight {
+    background-image: url("./assets/right-arrow.svg");
+}
+
+#ArrowDown {
+    background-image: url("./assets/down-arrow.svg");
+}

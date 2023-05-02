@@ -53,7 +53,7 @@ function changeContent(element, newContent = "", option = "renew") {
 let lang = localStorage.getItem("lang")
   ? JSON.parse(localStorage.getItem("lang"))
   : "en";
-console.log('lang: ', lang);
+console.log("lang: ", lang);
 let isShiftPressed = false;
 let isCaps = false;
 
