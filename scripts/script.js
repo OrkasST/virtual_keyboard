@@ -106,6 +106,7 @@ function fillKeyboard() {
 fillKeyboard();
 
 function buttonDown(e) {
+  e.preventDefault();
   let element = e.code ? document.getElementById(e.code) : e.target;
   element.classList.add("_pressed");
   if (element.id === "ShiftLeft" || element.id === "ShiftRight") {
@@ -132,6 +133,10 @@ function buttonDown(e) {
   }
   if (element.id === "Delete") {
     changeContent(display, "", "delete");
+    return;
+  }
+  if (element.id === "Tab") {
+    changeContent(display, "\t", "add");
     return;
   }
   if (element.id.substring(0, 5) === "Arrow") {

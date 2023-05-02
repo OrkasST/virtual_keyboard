@@ -13,6 +13,9 @@
     margin-top: 5rem;
 
     padding: 1rem;
+
+    word-wrap: break-word;
+    overflow-y: auto;
 }
 
 .keyboard {
